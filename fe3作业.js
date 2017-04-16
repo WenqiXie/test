@@ -5,6 +5,9 @@
 // 注意, 代码可以在写好后贴在 浏览器终端 中运行
 // 注意, 这个链接会更新, 我会增加新的题目提示和『交作业的方式』
 
+var log = function() {
+  return console.log.apply(console, arguments);
+}
 
 // 例子 1
 // 求数组的和
@@ -22,8 +25,8 @@ var sum = function(array) {
   	return s
 }
 
-var a = [1, 2, 3, 4]
-log('sum', sum(a))
+// var a = [1, 2, 3, 4]
+// log('sum', sum(a))
 
 
 
@@ -32,50 +35,55 @@ log('sum', sum(a))
 // 求 array 的乘积
 // 函数定义是
 var product = function(array) {
-	var s=1;
-	for(var i=0;i<array.length;i++){
-		var n=arry[i];
-		s*=arry[i];
+	var s =1;
+	for(var i = 0; i < array.length; i++){
+		var n = array[i];
+		s *= n
 	}
 	return s;
 }
-
+// var a = [1, 2, 3, 4]
+// product(a)
 
 // 作业 2
 // 返回一个数的绝对值
 // 函数定义是
 var abs = function(n) {
-	var n=n>=0?n:-n;
+	var n = n >=0 ? n : -n;
+  return n
 }
-
+// abs(1)
+// abs(-1)
 
 // 作业 3
 // 参数是一个只包含数字的 array
 // 求 array 中所有数字的平均数
 // 函数定义是
 var average = function(array) {
-	var s=0;
-	var length=array.length
-	for(var i=0;i<length;i++){
-		var n=arry[i];
-		s+=arry[i];
+	var s = 0;
+	var length = array.length
+	for(var i = 0; i < length; i++){
+		var n = array[i];
+		s += n
 	}
-	var average=s/length;
+	var average = s/length;
 	return average;
 }
-
+var a = [1, 2, 3, 4]
+average(a)
 
 // 作业 4
 // 参数是一个只包含数字的 array
 // 求 array 中最小的数字
 // 函数定义是
 var min = function(array) {
-  var min=array[0];
+  var min = array[0];
   for (var i = 1; i < array.length; i++) {
-    min=min<array[i]?min:array[i];
+    min = min<array[i] ? min : array[i];
   }
+  return min
 }
-
+min(a)
 
 // 作业 5
 /*
@@ -94,7 +102,8 @@ var sum1 = function(n) {
 	}
   return sum;
 }
-
+sum1(5)
+sum1(8)
 
 // 作业 6
 /*
@@ -113,13 +122,14 @@ var sum2 = function(n) {
 	}
   return sum;
 }
-
+sum2(4)
+sum2(6)
 
 // 作业 7
 /*
 实现 fac 函数
 接受一个参数 n
-返回 n 的阶乘, 1 * 2 * 3 * ... * n
+返回 n 的阶乘, 1 * 2 * 3 * 4 * ... * n
 */
 var fac = function(n) {
   if (n<=1) {
@@ -127,9 +137,8 @@ var fac = function(n) {
   } else {
     return n*fac(n-1);
   }
-
-
-
+}
+fac(4)
 /*
 注意 下面几题中的参数 op 是 operator(操作符) 的缩写
 
@@ -151,7 +160,7 @@ var apply = function(op, a, b) {
       return a / b;
     }
 }
-
+apply("/", 4, 8)
 
 /*
 作业 9
@@ -165,27 +174,31 @@ log(n)
 // 结果是 4, 用第一个数字减去所有的数字
 */
 var applyList = function(op, oprands) {
-  if(op=="+"){
+  if(op == "+"){
     var result=0;
     for (var i = 0; i < oprands.length; i++) {
       result=result+oprands[i];
     }
-  }else if (op=="-") {
+  }else if (op == "-") {
     var result=oprands[0];
     for (var i = 1; i < oprands.length; i++) {
-      result=result-oprands[i];
+      result = result-oprands[i];
     }
-  }else if (op=="*") {
-    var result=1;
+  }else if (op == "*") {
+    var result = 1;
     for (var i = 0; i < oprands.length; i++) {
-      result=result*oprands[i];
+      result = result*oprands[i];
     }
   }else {
     var result=oprands[0];
     for (var i = 1; i < oprands.length; i++) {
       result=result/oprands[i];
+    }
   }
+  return result
 }
+var n = applyList('-', [3, 4, 2, 1])
+log(n)
 
 
 /*
@@ -200,15 +213,21 @@ expression 是一个 array(数组), 包含了 3 个元素
 var applyCompare = function(expression) {
   var a=expression[0],b=expression[1],c=expression[2];
     switch (a) {
-      case a==">":return b>c
+      case ">":
+        return b>c
         break;
-      case a=="<":return b<c;
+      case "<":
+        return b<c
         break;
-      case a=="==":return b==c;
+      case "==":
+        return b==c
         break;
-      default:there is no result;
+      default:
     }
 }
+
+// applyCompare(['>', 1, 2])
+// applyCompare(['==', 1, 2])
 
 
 /*
@@ -223,34 +242,37 @@ expression 中第一个元素是上面几题的 op, 剩下的元素是和 op 对
 根据 expression 运算并返回结果
 */
 var applyOps = function(expression) {
-  op=expression[0];
-  if(op=="+"){
+  var op = expression[0];
+  var array = expression[1];
+  console.log('array', array);
+  if(op == "+"){
     var result=0;
-    for (var i = 1; i < expression.length; i++) {
-      result=result+expression[i];
+    for (var i = 0; i < array.length; i++) {
+      result += array[i]
     }
     return result;
-  }else if (op=="-") {
-    var result=expression[1];
-    for (var i = 2; i < expression.length; i++) {
-      result=result-expression[i];
+  }else if (op == "-") {
+    var result = array[0];
+    for (var i = 1; i < array.length; i++) {
+      result = result - array[i];
     }
     return result;
-  }else if (op=="*") {
+  }else if (op == "*") {
     var result=1;
-    for (var i = 0; i < expression.length; i++) {
-      result=result*expression[i];
+    for (var i = 0; i < array.length; i++) {
+      result *= array[i];
     }
     return result;
   }else {
-    var result=expression[1];
-    for (var i = 2; i < expression.length; i++) {
-      result=result/expression[i];
+    var result = array[0];
+    for (var i = 1; i < array.length; i++) {
+      result /= array[i];
     }
     return result;
   }
 }
 
+applyOps(['-', [3, 4, 2, 1]])
 
 
 // 注意
