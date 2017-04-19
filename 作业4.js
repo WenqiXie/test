@@ -52,7 +52,7 @@ var test_sample = function() {
     ensure(1 > 2, '测试 1 > 2 失败')
 }
 
-//test_sample()
+test_sample()
 // 调用上面的 test_sample 可以得到如下输出
 // *** 测试失败: 测试 1 > 2 失败
 
@@ -134,6 +134,13 @@ var uppercase = function(s) {
   return result;
 }
 
+function find (s1,s2) {
+  for (var j = 0; j < s1.length; j++) {
+    if (s1[j] == s2) {
+      return j;
+    }
+  }
+}
 uppercase("abczf");
 
 /*
@@ -148,17 +155,19 @@ uppercase("abczf");
 var lowercase1 = function(s) {
   var result = "";
   for (var i = 0; i < s.length; i++) {
-    var index = find (upper,s[i]);
-    if (index >= 0) {
-      result += lower[index];
-    } else {
+    if (s.charCodeAt(i) >= 95) {
       result += s[i];
+    } else {
+      var index = find (upper,s[i]);
+      result += lower[index];
     }
   }
   return result;
 }
 
 lowercase1("ABCdef");
+
+
 
 /*
 作业 4
@@ -171,17 +180,17 @@ lowercase1("ABCdef");
 var uppercase1 = function(s) {
   var result = "";
   for (var i = 0; i < s.length; i++) {
-    var index = find(lower , s[i]);
-    if (index >= 0) {
-      result += upper[index];
-    } else {
+    if (s.charCodeAt(i) < 95) {
       result += s[i];
+    } else {
+      var index = find (lower,s[i]);
+      result += upper[index];
     }
   }
   return result;
 }
 
-uppercase1("ABC def ");
+uppercase1("ABCdef");
 
 
 /*
@@ -205,8 +214,7 @@ var encode1 = function(s) {
   var result = "";
   for (var i = 0; i < s.length; i++) {
     if (s[i] != "z") {
-      var index = find (lower , s[i]);
-      index = Number(index);
+      var index = find (lower,s[i]);
       result += lower[index + 1];
     } else {
       result += "a";
@@ -234,7 +242,6 @@ var decode1 = function(s) {
   for (var i = 0; i < s.length; i++) {
     if (s[i] != "a") {
       var index = find (lower,s[i]);
-      index = Number(index);
       result += lower[index - 1];
     } else {
       result += "z";
@@ -259,10 +266,9 @@ decode1("bcda");
 */
 var encode2 = function(s, shift) {
   var result = "";
-  shift = shift % 25;
   for (var i = 0; i < s.length; i++) {
     var index = find (lower,s[i]);
-    index = Number(index);
+    shift = shift % 25;
       if (index + shift <=25) {
         result += lower[index + shift];
       } else {
@@ -292,10 +298,9 @@ encode2("abcz" , 27);
 */
 var decode2 = function(s, shift) {
   var result = "";
-  shift = shift % 25;
   for (var i = 0; i < s.length; i++) {
     var index = find (lower,s[i]);
-    index = Number(index);
+    shift = shift % 25;
       if (index - shift >=0) {
         result += lower[index - shift];
       } else {
@@ -323,11 +328,10 @@ decode2("xyzw" , 23);
 */
 var encode3 = function(s, shift) {
   var result = "";
-  shift = shift % 25;
   for (var i = 0; i < s.length; i++) {
     var index = find (lower,s[i]);
-    index = Number(index);
-    if (index >= 0) {
+    shift = shift % 25;
+    if (s[i].indexOf(lower)) {
       if (index + shift <=25) {
         result += lower[index + shift];
       } else {
@@ -358,16 +362,15 @@ encode3("abcz " , 23);
 */
 var decode3 = function(s, shift) {
   var result = "";
-  shift = shift % 25;
   for (var i = 0; i < s.length; i++) {
     var index = find (lower,s[i]);
-    index = Number(index);
-    if (index >= 0) {
+    shift = shift % 25;
+    if (s[i].indexOf(lower)) {
       if (index - shift >=0) {
         result += lower[index - shift];
       } else {
-        var shift1 = index - shift + 26;
-        result += lower[shift1];
+        shift = index - shift + 26;
+        result += lower[shift];
       }
     } else {
       result += s[i];
@@ -375,8 +378,6 @@ var decode3 = function(s, shift) {
   }
   return result;
 }
-
-decode3("xyzw " , 23)
 
 
 /*
@@ -397,13 +398,5 @@ https://www.zhihu.com/question/28324597
 var code = 'VRPHWLPHV L ZDQW WR FKDW ZLWK BRX,EXW L KDYH QR UHDVRQ WR FKDW ZLWK BRX'
 
 var decode4 = function(s) {
-  code = lowercase1(code);
-  var value = "";
-  for (var i = 0; i < 26; i++) {
-    let c1 = decode3(code, i);
-    value += c1 +"\n";
-  }
-  return value;
-}
 
-decode4(code)
+}
