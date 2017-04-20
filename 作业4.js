@@ -52,7 +52,7 @@ var test_sample = function() {
     ensure(1 > 2, '测试 1 > 2 失败')
 }
 
-// test_sample()
+test_sample()
 // 调用上面的 test_sample 可以得到如下输出
 // *** 测试失败: 测试 1 > 2 失败
 
@@ -66,7 +66,7 @@ var find = function(s1, s2) {
     但 s2 的长度是 1
 
     返回 s2 在 s1 中的下标, 从 0 开始, 如果不存在则返回 -1
-    indexOf
+
     提示:
         循环比较, 如果发现就返回
         注意处理 s2 不存在的情况
@@ -134,13 +134,13 @@ var uppercase = function(s) {
   return result;
 }
 
-// function find (s1,s2) {
-//   for (var j = 0; j < s1.length; j++) {
-//     if (s1[j] == s2) {
-//       return j;
-//     }
-//   }
-// }
+function find (s1,s2) {
+  for (var j = 0; j < s1.length; j++) {
+    if (s1[j] == s2) {
+      return j;
+    }
+  }
+}
 uppercase("abczf");
 
 /*
@@ -152,30 +152,17 @@ uppercase("abczf");
 提示:
     因为可能字符串中带小写字符, 那么就要判断一下才能处理
 */
-// var lowercase1 = function(s) {
-//   var result = "";
-//   for (var i = 0; i < s.length; i++) {
-//     if (s.charCodeAt(i) >= 97) {
-//       result += s[i];
-//     } else {
-//       var index = find (upper,s[i]);
-//       result += lower[index];
-//     }
-//   }
-//   return result;
-// }
-
 var lowercase1 = function(s) {
-  var result = ''
+  var result = "";
   for (var i = 0; i < s.length; i++) {
-    let index = find(upper, s[i])
-    if (index >= 0) {
-      result += lower[index]
+    if (s.charCodeAt(i) >= 95) {
+      result += s[i];
     } else {
-      result += s[i]
+      var index = find (upper,s[i]);
+      result += lower[index];
     }
   }
-  return result
+  return result;
 }
 
 lowercase1("ABCdef");
@@ -227,8 +214,7 @@ var encode1 = function(s) {
   var result = "";
   for (var i = 0; i < s.length; i++) {
     if (s[i] != "z") {
-      var index = find(lower,s[i])
-      index = Number(index) // index 必须是 Number
+      var index = find (lower,s[i]);
       result += lower[index + 1];
     } else {
       result += "a";
@@ -238,7 +224,7 @@ var encode1 = function(s) {
 }
 
 encode1("abcz");
-// bcda
+
 
 /*
 作业 6
@@ -282,7 +268,6 @@ var encode2 = function(s, shift) {
   var result = "";
   for (var i = 0; i < s.length; i++) {
     var index = find (lower,s[i]);
-    index = Number(index)
     shift = shift % 25;
       if (index + shift <=25) {
         result += lower[index + shift];
@@ -344,10 +329,9 @@ decode2("xyzw" , 23);
 var encode3 = function(s, shift) {
   var result = "";
   for (var i = 0; i < s.length; i++) {
-    var index = find(lower,s[i]);
-    index = Number(index)
+    var index = find (lower,s[i]);
     shift = shift % 25;
-    if (index >= 0) {
+    if (s[i].indexOf(lower)) {
       if (index + shift <=25) {
         result += lower[index + shift];
       } else {
@@ -378,17 +362,15 @@ encode3("abcz " , 23);
 */
 var decode3 = function(s, shift) {
   var result = "";
-  shift = shift % 25;
   for (var i = 0; i < s.length; i++) {
     var index = find (lower,s[i]);
-    index = Number(index)
-    if (index >= 0) {
+    shift = shift % 25;
+    if (s[i].indexOf(lower)) {
       if (index - shift >=0) {
         result += lower[index - shift];
       } else {
-        let shift1 = index - shift + 26;
-        // console.log('shift', shift1);
-        result += lower[shift1];
+        shift = index - shift + 26;
+        result += lower[shift];
       }
     } else {
       result += s[i];
@@ -396,11 +378,8 @@ var decode3 = function(s, shift) {
   }
   return result;
 }
-// console.log(decode3('abcd=/', 5));
 
 
-// vwxy=/
-// var lower = 'abcdefghijklmnopqrstuvwxyz'
 /*
 作业 11
 知乎有一个求助题, 破译密码的
@@ -419,12 +398,5 @@ https://www.zhihu.com/question/28324597
 var code = 'VRPHWLPHV L ZDQW WR FKDW ZLWK BRX,EXW L KDYH QR UHDVRQ WR FKDW ZLWK BRX'
 
 var decode4 = function(s) {
-  code = lowercase1(code)
-  // console.log('code', code);
-  for (var i = 0; i < 26; i++) {
-    let c1 = decode3(code, i)
-    // console.log('c1', c1);
-  }
+
 }
-decode4(code)
-// sometimes i want to chat with you,but i have no reason to chat with you
