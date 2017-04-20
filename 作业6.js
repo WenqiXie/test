@@ -211,26 +211,38 @@ var topStudent = function(students) {
     }
     返回 score 最高的那个元素(object)
     */
-    var scores = new Array;
-    for (var i = 0; i < students.length; i++) {
-      let score_i = students[i]['score'];
-      scores.push(score_i);
-    }
-    var max = scores[0];
-    for (var j = 1; j < scores.length; j++) {
-      if (max >= scores[j]) {
-        max = max;
-      } else {
-        max = scores[j];
+    // 先把 score 取出来，存入数组 scores
+    let object = students[0],
+    max_score = object['score'];
+    for (var i = 1; i < students.length; i++) {
+      if (students[i]['score'] > max_score) {
+        object = students[i]
       }
     }
-    //var index = scores.indexOf(max);
-    // return students[index];
-    for (var j = 0; j < scores.length; j++) {
-      if (scores[j] == max) {
-        return students[j];
-      }
-    }
+    // console.log('object', object);
+    return object
+
+    // var scores = new Array;
+    // for (var i = 0; i < students.length; i++) {
+    //   let score_i = students[i]['score'];
+    //   scores.push(score_i);
+    // }
+    // var max = [0, scores[0]];
+    // for (var j = 1; j < scores.length; j++) {
+    //   if (max[1] < scores[j]) {
+    //     max[1] = scores[j]
+    //     max[0] = j
+    //   }
+    // }
+    // let index = max[0]
+    // students[index]
+    // //var index = scores.indexOf(max);
+    // // return students[index];
+    // for (var j = 0; j < scores.length; j++) {
+    //   if (scores[j] == max) {
+    //     return students[j];
+    //   }
+    // }
 }
 
 // 目前只有两个数据, 自行扩充到 5 个
@@ -262,7 +274,7 @@ var student_list = [
     }
 ]
 
-topStudent(student_list)
+// topStudent(student_list)
 
 
 // 作业 7
@@ -341,14 +353,13 @@ var prettyLog = function(array) {
     var newArr = new Array();
     var max = array[0].length;
     for (var i = 1; i < array.length; i++) {
-      if (max >= array[i].length) {
-        max = max;
-      } else {
+      if (max < array[i].length) {
         max = array[i].length;
       }
     }
     var strlength = max + 4;
     newArr[0] = addChar_1(strlength , "+");
+    // 得到第一行
     // console.log(newArr[0]);
     for (var i = 0; i < array.length; i++) {
       newArr[i + 1] = addChar(array[i] , strlength);

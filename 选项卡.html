@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>选项卡</title>
+    <style media="screen">
+      button {
+        width: 120px;
+      }
+      .box {
+        display: none;
+        width: 200px;
+        height: 100px;
+        background-color: pink;
+      }
+      .active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <button data-id="1" type="button" name="button">选项卡1</button>
+    <button data-id="2" type="button" name="button">选项卡2</button>
+    <button data-id="3" type="button" name="button">选项卡3</button>
+    <div class="box" id="b1">
+      box1
+    </div>
+    <div class="box" id="b2">
+      box2
+    </div>
+    <div class="box" id="b3">
+      box3
+    </div>
+    <script src="jquery-3.2.1.js" charset="utf-8"></script>
+    <script src="yh.js" charset="utf-8"></script>
+    <script type="text/javascript">
+    // 函数的简单封装
+      bindAll('button', 'click', function() {
+        let target = event.target
+        let id = target.dataset.id
+        let showedBox = e(`#b${id}`)
+        removeClassAll('active')
+        showedBox.classList.add('active')
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <style media="screen">
+    .a {
+      background-color: red;
+      width: 100px;
+      height: 100px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="a">
+      123
+    </div>
+    <script src="jquery-3.2.1.js" charset="utf-8"></script>
+    <script type="text/javascript">
+    $('.a').on('click', function() {
+      console.log(this);
+      this.innerText = '345'
+    })
+    </script>
+  </body>
+</html>

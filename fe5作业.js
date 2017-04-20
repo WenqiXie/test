@@ -203,26 +203,38 @@ var center = function(s, width, fillchar=' ') {
     */
     var result = "";
     var length = width - s.length;
-    if (length >= 0) {
-      if (length % 2 == 0) {
-        let length1 = length / 2;
-        let result1 = "";
-        for (var i = 0; i < length1; i++) {
-          result1 += fillchar;
-        }
-        result += result1 + s + result1;
-      } else {
-        let length2 = (length -1)  / 2
-        let result2 = "";
-        for (var i = 0; i < length2; i++) {
-          result2 += fillchar;
-        }
-        result += result2 + s + result2 + fillchar;
-      }
-      return result;
-    } else {
-      return s;
+
+    if (length <= 0) {
+      return s
     }
+    
+    let length1 = length / 2;
+    let result1 = "";
+    for (var i = 0; i <= length1 - 1; i++) {
+      result1 += fillchar
+    }
+    result += result1 + s + result1;
+    if (length % 2 == 1) {
+      result += fillchar
+    }
+    console.log('result', result);
+
+    // if (length % 2 == 0) {
+    //   let length1 = length / 2;
+    //   let result1 = "";
+    //   for (var i = 0; i < length1; i++) {
+    //     result1 += fillchar;
+    //   }
+    //   result += result1 + s + result1;
+    // } else {
+    //   let length2 = (length -1)  / 2
+    //   let result2 = "";
+    //   for (var i = 0; i < length2; i++) {
+    //     result2 += fillchar;
+    //   }
+    //   result += result2 + s + result2 + fillchar;
+    // }
+    return result;
 }
 
 center("abcd" , 8 , "@")
