@@ -86,12 +86,10 @@ var zfill = function(n, width) {
         result += 0;
       }
       result += n;
-      return result;
     } else {
-       l = -l;
-      result += n.slice(l-1);
-      return result;
+      result = n
     }
+    return result;
 }
 
 zfill(123456789 , 12)
@@ -106,7 +104,7 @@ var test_zfill = function() {
 }
 
 // 调用测试函数
-//test_zfill()
+// test_zfill()
 
 
 // 作业 2
@@ -149,7 +147,7 @@ var test_ljust = function() {
     ensure(ljust('guagua', 5) === 'guagua', 'ljust 测试 2')
     ensure(ljust('gua', 5, '*') === 'gua**', 'ljust 测试 3')
 }
-
+test_ljust()
 
 // 作业 3
 // 10 分钟做不出就看提示
@@ -239,7 +237,7 @@ var test_center = function() {
     ensure(center('gw', 5) === ' gw  ', 'center 测试 3')
     ensure(center('gua', 6) === ' gua  ', 'center 测试 4')
 }
-
+test_center()
 
 
 // 作业 5
@@ -465,8 +463,10 @@ var checkName = function(e) {
   var index = find(lower , s[0]);
   if (s.length >= 2 && index > 0) {
     console.log('检查合格');
+    return true
   } else {
     console.log('用户名错误');
+    return false
   }
 
 }
@@ -487,6 +487,11 @@ var lowercase1 = function(s) {
 
 // 作业 12
 /*
+
+1，第一位是字母
+2，最小长度2
+
+
 注意, 本题的提示在文件的末尾, 做不出就看提示步骤
 
 在上个作业的基础上
@@ -505,27 +510,59 @@ var lowercase1 = function(s) {
 var char = 'abcdefghijklmnopqrstuvwxyz0123456789_'
 
 var checkName1 = function(e) {
+  var h3 = document.querySelector('h3')
   var str = document.getElementById('name');
   s = str.value;
   s = lowercase1(s);
-  var index = find(lower , s[0]);
-  var index1 = find(num , s[s.length-1]);
-  var index2 = find(lower ,s[s.length-1]);
-  var index3 = Boolean(index1 > 0 || index2 > 0);
-  var index4 = Boolean(10 >= s.length && s.length >= 2);
-  if (index4 > 0 && index > 0 && index3 > 0) {
-    for (var i = 1; i < s.length-1; i++) {
-      let index5 = find(char , s[i]);
-      if (index5 < 0) {
-        console.log('用户名错误');
+  // 上一题的条件
+  var index0 = checkName(s)
+  if (index0 == false) {
+    console.log('用户名错误');
+    h3.innerHTML = '用户名错误'
+    return false;
+  }
+  // 本题条件 1
+  var end = s[s.length - 1]
+  var char1 = char.slice(0, char.length - 1)
+  var t1 = find(char1, end) // 1 -1
+  console.log('t1', t1);
+  // 本题条件 2
+  var t2 = s.length <= 10 // true false
+  console.log('t2', t2);
+  // 本题条件 3
+  var _t3 = function() {
+    for (var i = 0; i < s.length; i++) {
+      if (find(char, s[i]) == false) {
+        return false
       }
     }
-    if (i == s.length-1) {
-      console.log('检查合格');
-    }
+    return true
+  }
+  var t3 = _t3() // true false
+  if (t1 == 1 && t2 == true && t3 == true) {
+    console.log('检查合格');
+    h3.innerText = '检查合格'
   } else {
     console.log('用户名错误');
   }
+  // var index = find(lower , s[0]);
+  // var index1 = find(num , s[s.length-1]);
+  // var index2 = find(lower ,s[s.length-1]);
+  // var index3 = Boolean(index1 > 0 || index2 > 0);
+  // var index4 = Boolean(10 >= s.length && s.length >= 2);
+  // if (index4 > 0 && index > 0 && index3 > 0) {
+  //   for (var i = 1; i < s.length-1; i++) {
+  //     let index5 = find(char , s[i]);
+  //     if (index5 < 0) {
+  //       console.log('用户名错误');
+  //     }
+  //   }
+  //   if (i == s.length-1) {
+  //     console.log('检查合格');
+  //   }
+  // } else {
+  //   console.log('用户名错误');
+  // }
 }
 
 
