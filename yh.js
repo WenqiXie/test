@@ -6,8 +6,7 @@ var es = function(selector) {
   return document.querySelectorAll(selector)
 }
 
-var bindAll = function(element, e, fun) {
-  var elements = document.querySelectorAll(element)
+var bindAll = function(elements, e, fun) {
   for (var i = 0; i < elements.length; i++) {
     elements[i].addEventListener(e, fun)
   }

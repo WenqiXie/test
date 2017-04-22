@@ -76,6 +76,19 @@ var test_join = function() {
     ensure(join('\n', ['multi', 'line', 'string']) == 'multi\nline\nstring', 'join 测试 3')
 }
 
+// '1  2  3' , "  "
+var find = function(s, s1) {
+  // console.log("find 执行");
+  var arr = [];
+  for (var i = 0; i < s.length; i++) {
+    let s_1 = s.slice(i, i + s1.length)
+    // console.log('s_1', s_1);
+    if (s_1 == s1) {
+      arr.push(i)
+    }
+  }
+  return arr
+}
 
 // 作业 2
 // 实现函数
@@ -90,6 +103,13 @@ var split = function(s, delimiter=' ') {
     split('a=b&c=d', '&') 返回 ['a=b', 'c=d']
     注意, 测试 array 是否相等得自己写一个函数用循环来跑
     */
+    // var index = find(s, delimiter)
+    // console.log('index', index);
+    // // 0 index[0]     index[0] + delimiter.length index[1]
+    // for (var i = 0; i < s.length; i++) {
+    //
+    //   // s.slice(i, )
+    // }
 
     var sp = new Array;
     var step = 0;
@@ -105,8 +125,8 @@ var split = function(s, delimiter=' ') {
     return sp;
 }
 
-split('1  2  3' , "  ")
-split('a=b&c=d', '&')
+// split('1  2  3' , "  ")
+// split('a=b&c=d', '&')
 
 // 作业 3
 // 实现函数
@@ -118,11 +138,12 @@ var replaceAll = function(s, old, newString) {
 
     var array = split(s , old);
     var s = join(newString , array);
+    // console.log('s', s);
     return s;
 }
 
-replaceAll("abcdabefab" , "ab" , "123")
-replaceAll("abcdabef" , "ab" , "123")
+// replaceAll("abcdabefab" , "ab" , "123")
+// replaceAll("abcdabef" , "ab" , "123")
 
 // 作业 4
 // 实现函数
@@ -135,21 +156,28 @@ var str1 = function(n) {
     2       '121'
     3       '12321'
     */
+    // let n1 = String(n)
+    // for (var i = 1; i < n; i++) {
+    //   n1 = (n - i) + n1 + (n - i)
+    // }
+    // console.log('n1', n1);
+
     var s = new Array;
     for (var k = 0; k < n; k++) {
       s[k] = k + 1;
     }
 
     for (var i = 0; i < n; i++) {
-      let string = "";
+      var string = "";
       for (var j = 0; j <= i; j++) {
         string += s[j];
       }
       for (var m = i - 1; 0 <= m; m--) {
         string += s[m];
       }
-      // console.log(string);
     }
+    console.log(string);
+    return string
 
     // for (var i = 1; i <= n; i++) {
     //   let string = "";
@@ -163,7 +191,8 @@ var str1 = function(n) {
     // }
 }
 
-str1(5)
+// str1(5)
+// str1(7)
 
 // 作业 5
 // 实现函数
@@ -178,15 +207,16 @@ var str2 = function(n) {
     */
     var s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     for (var i = 0; i < n; i++) {
-      let string = "";
+      var string = "";
       for (var j = 0; j <= i; j++) {
         string += s[j];
       }
       for (var m = i - 1; 0 <= m; m--) {
         string += s[m];
       }
-      // console.log(string);
     }
+    // console.log(string);
+    return string
 }
 
 str2(5)
