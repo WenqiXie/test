@@ -6,6 +6,10 @@ var es = function(selector) {
   return document.querySelectorAll(selector)
 }
 
+var bindEvent = function(element, e, callback) {
+  element.addEventListener(e, callback)
+}
+
 var bindAll = function(elements, e, fun) {
   for (var i = 0; i < elements.length; i++) {
     elements[i].addEventListener(e, fun)
