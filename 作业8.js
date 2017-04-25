@@ -84,9 +84,22 @@ var union = function(a, b) {
     返回一个 array, 里面的元素是所有出现在 a b 中的元素
     这个 array 中不包含重复元素
     /*/
-
+    var arr = []
+    arr[0] = a[0]
+    for (var i = 1; i < a.length; i++) {
+      if (!arr.includes(a[i])) {
+        arr.push(a[i])
+      }
+    }
+    for (var i = 0; i < b.length; i++) {
+      if (!arr.includes(b[i])) {
+        arr.push(b[i])
+      }
+    }
+    console.log('arr', arr);
+    return arr
 }
-
+union([1, 3, 5, 2, 7], [2, 4, 5, 3, 2])
 
 // 作业 4
 //
