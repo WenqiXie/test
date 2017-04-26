@@ -16,8 +16,18 @@ var bindAll = function(elements, e, fun) {
   }
 }
 
-var removeClassAll = function(className) {
-  var cs = es("." + className)
+// var removeClassAll = function(className) {
+//   var cs = es("." + className)
+//   if (cs.length > 0) {
+//     for (var i = 0; i < cs.length; i++) {
+//       cs[i].classList.remove(className)
+//     }
+//   }
+// }
+
+var removeClassAll = function(className, context) {
+  context  = context || document
+  var cs = context.querySelectorAll('.' + className)
   if (cs.length > 0) {
     for (var i = 0; i < cs.length; i++) {
       cs[i].classList.remove(className)
